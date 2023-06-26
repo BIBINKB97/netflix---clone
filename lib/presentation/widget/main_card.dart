@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:netflix/core/colors/constants.dart';
 
 class MainCard extends StatelessWidget {
   const MainCard({
@@ -8,14 +7,18 @@ class MainCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 150,
-      height: 250,
-      decoration: BoxDecoration(
-          borderRadius: kRadius10,
-          image: DecorationImage(
-              image: NetworkImage(
-                  "https://www.themoviedb.org/t/p/w220_and_h330_face/3IhGkkalwXguTlceGSl8XUJZOVI.jpg"))),
+    return Padding(
+      padding: const EdgeInsets.only(left: 10, bottom: 10, top: 2),
+      child: Container(
+        width: 130,
+        height: 250,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(6)),
+            image: DecorationImage(
+                fit: BoxFit.cover,
+                image: NetworkImage(
+                    "https://www.themoviedb.org/t/p/w220_and_h330_face/3IhGkkalwXguTlceGSl8XUJZOVI.jpg"))),
+      ),
     );
   }
 }
