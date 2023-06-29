@@ -1,9 +1,7 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:netflix/core/colors/colors.dart';
 import 'package:netflix/core/colors/constants.dart';
-
 import 'package:netflix/presentation/widget/app_bar_widget.dart';
 
 class ScreenDownloads extends StatelessWidget {
@@ -15,7 +13,6 @@ class ScreenDownloads extends StatelessWidget {
   ];
   @override
   Widget build(BuildContext context) {
-    final Size size = MediaQuery.of(context).size;
     return Scaffold(
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(50),

@@ -11,8 +11,9 @@ class AppBarWidget extends StatelessWidget {
       children: [
         kWidth,
         Text(
-          "Downloads",
-          style: TextStyle(fontSize: 30, fontWeight: FontWeight.w900),
+          title,
+          style: TextStyle(
+              fontSize: 30, fontWeight: FontWeight.w900, color: Colors.white),
         ),
         Spacer(),
         Icon(

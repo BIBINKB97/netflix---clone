@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:netflix/core/colors/colors.dart';
+import 'package:flutter/rendering.dart';
 import 'package:netflix/core/colors/constants.dart';
 import 'package:netflix/presentation/home/widget/number_title_card.dart';
 import 'package:netflix/presentation/widget/main_title_card.dart';
+import 'widget/background_card.dart';
 
-import 'widget/custom_button_widget.dart';
+ValueNotifier<bool> scrollNotifier = ValueNotifier(true);
 
 class ScreenHome extends StatelessWidget {
   const ScreenHome({super.key});
@@ -12,64 +13,93 @@ class ScreenHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView(
-        children: [
-          Stack(
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                    image: DecorationImage(image: NetworkImage(kMainImage))),
-                width: double.infinity,
-                height: 600,
+      body: ValueListenableBuilder(
+          valueListenable: scrollNotifier,
+          builder: (BuildContext context, value, _) {
+            return NotificationListener<UserScrollNotification>(
+              onNotification: (notification) {
+                final ScrollDirection direction = notification.direction;
+                if (direction == ScrollDirection.reverse) {
+                  scrollNotifier.value = false;
+                } else if (direction == ScrollDirection.forward) {
+                  scrollNotifier.value = true;
+                }
+                return true;
+              },
+              child: Stack(
+                children: [
+                  ListView(
+                    children: [
+                      Column(
+                        children: const [
+                          BackgroundCard(),
+                          kheight,
+                          MainTitleCard(title: "Released in the past year"),
+                          kheight,
+                          MainTitleCard(title: "Trending Now"),
+                          kheight,
+                          NumberTitleCard(),
+                          kheight,
+                          MainTitleCard(title: "Tense Dramas"),
+                          kheight,
+                          MainTitleCard(title: "South Indian Cinema"),
+                        ],
+                      ),
+                    ],
+                  ),
+                  scrollNotifier.value == true
+                      ? AnimatedContainer(
+                          duration: Duration(milliseconds: 1000),
+                          width: double.infinity,
+                          height: 90,
+                          color: Colors.black.withOpacity(0.4),
+                          child: Column(children: [
+                            Row(
+                              children: [
+                                Image.network(
+                                  "https://www.pngarts.com/files/1/Netflix-Logo-PNG-Transparent-Image.png",
+                                  height: 60,
+                                  width: 70,
+                                ),
+                                Spacer(),
+                                Icon(
+                                  Icons.cast,
+                                  color: Colors.white,
+                                  size: 30,
+                                ),
+                                kWidth,
+                                Container(
+                                  width: 30,
+                                  height: 30,
+                                  color: Colors.blue,
+                                ),
+                                kWidth,
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Text(
+                                  "TV Shows",
+                                  style: khomeTitleText,
+                                ),
+                                Text(
+                                  "Movies",
+                                  style: khomeTitleText,
+                                ),
+                                Text(
+                                  "Categories",
+                                  style: khomeTitleText,
+                                ),
+                              ],
+                            )
+                          ]),
+                        )
+                      : kheight,
+                ],
               ),
-              Positioned(
-                bottom: 0,
-                left: 0,
-                right: 0,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    CustomButtonWidget(
-                      title: "My List",
-                      icon: Icons.add,
-                    ),
-                    _playButton(),
-                    CustomButtonWidget(
-                        icon: Icons.info_outline_rounded, title: "info"),
-                  ],
-                ),
-              )
-            ],
-          ),
-          Column(
-            children: const [
-              MainTitleCard(title: "Released in the past year"),
-              MainTitleCard(title: "Trending Now"),
-              NumberTitleCard(),
-              MainTitleCard(title: "Tense Dramas"),
-              MainTitleCard(title: "South Indian Cinema"),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
-  TextButton _playButton() {
-    return TextButton.icon(
-      onPressed: () {},
-      style:
-          ButtonStyle(backgroundColor: MaterialStateProperty.all(kwhiteColor)),
-      icon: Icon(
-        Icons.play_arrow,
-        color: kblackColor,
-        size: 28,
-      ),
-      label: Text(
-        "Play    ",
-        style: TextStyle(
-            fontSize: 18, color: kblackColor, fontWeight: FontWeight.bold),
-      ),
+            );
+          }),
     );
   }
 }
