@@ -13,7 +13,7 @@ class EveryonesWatchingWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
+      children: const [
         kheight,
         Text(
           "SpiderMan",
@@ -32,7 +32,7 @@ class EveryonesWatchingWidget extends StatelessWidget {
         kheight,
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
-          children: const [
+          children: [
             CustomButtonWidget(
               icon: Icons.share,
               iconsize: 25,
