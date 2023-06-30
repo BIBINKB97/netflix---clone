@@ -29,9 +29,9 @@ class ScreenHome extends StatelessWidget {
               child: Stack(
                 children: [
                   ListView(
-                    children: [
+                    children: const [
                       Column(
-                        children: const [
+                        children: [
                           BackgroundCard(),
                           kheight,
                           MainTitleCard(title: "Released in the past year"),

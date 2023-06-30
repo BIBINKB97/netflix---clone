@@ -42,7 +42,7 @@ class ComingSoonWidget extends StatelessWidget {
           height: 450,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
+            children: const [
               kheight,
               VideoWidget(),
               kheight,
@@ -57,7 +57,7 @@ class ComingSoonWidget extends StatelessWidget {
                   ),
                   Spacer(),
                   Row(
-                    children: const [
+                    children: [
                       CustomButtonWidget(
                         icon: Icons.notifications,
                         iconsize: 22,

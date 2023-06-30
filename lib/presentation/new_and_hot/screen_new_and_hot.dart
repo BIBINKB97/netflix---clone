@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:netflix/core/colors/colors.dart';
 import 'package:netflix/core/colors/constants.dart';
 import 'package:netflix/presentation/new_and_hot/widgets/everyons_watching_widget.dart';
-import 'package:netflix/presentation/new_and_hot/widgets/video_widget.dart';
 
-import '../home/widget/custom_button_widget.dart';
 import 'widgets/coming_soon_widget.dart';
 
 class ScreenNewAndHot extends StatelessWidget {
